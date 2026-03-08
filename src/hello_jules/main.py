@@ -5,17 +5,17 @@ import argparse
 from typing import List, Optional
 
 
-def get_greeting(name: str = "World") -> str:
+def get_greeting(message: str = "Hello World") -> str:
     """
-    Returns a standard greeting string.
+    Returns the greeting message.
 
     Args:
-        name (str): The name to greet. Defaults to "World".
+        message (str): The message to return. Defaults to "Hello World".
 
     Returns:
-        str: The greeting "Hello {name}".
+        str: The provided message.
     """
-    return f"Hello {name}"
+    return message
 
 
 def main(args: Optional[List[str]] = None) -> None:
@@ -25,17 +25,17 @@ def main(args: Optional[List[str]] = None) -> None:
     Args:
         args (Optional[List[str]]): Command line arguments.
     """
-    parser = argparse.ArgumentParser(description="Greets the user.")
+    parser = argparse.ArgumentParser(description="Prints a message.")
     parser.add_argument(
-        "name",
+        "message",
         nargs="?",
-        default="World",
-        help="The name to greet (default: World)"
+        default="Hello World",
+        help="The message to print (default: Hello World)"
     )
 
     parsed_args = parser.parse_args(args)
 
-    greeting = get_greeting(parsed_args.name)
+    greeting = get_greeting(parsed_args.message)
     print(greeting)
 
 

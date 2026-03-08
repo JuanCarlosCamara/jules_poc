@@ -6,10 +6,10 @@ from hello_jules.main import get_greeting, main
 
 def test_get_greeting() -> None:
     """
-    Test that get_greeting returns the exact expected string with default and custom name.
+    Test that get_greeting returns the exact expected string with default and custom message.
     """
     assert get_greeting() == "Hello World"
-    assert get_greeting("Jules") == "Hello Jules"
+    assert get_greeting("Bye World") == "Bye World"
 
 
 def test_main_default(capsys) -> None:
@@ -23,8 +23,8 @@ def test_main_default(capsys) -> None:
 
 def test_main_custom(capsys) -> None:
     """
-    Test that main prints the correct custom greeting to stdout.
+    Test that main prints the correct custom message to stdout.
     """
-    main(["Jules"])
+    main(["Bye World"])
     captured = capsys.readouterr()
-    assert captured.out.strip() == "Hello Jules"
+    assert captured.out.strip() == "Bye World"
