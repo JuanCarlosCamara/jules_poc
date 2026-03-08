@@ -6,7 +6,7 @@ from hello_jules.main import get_greeting, main
 
 def test_get_greeting() -> None:
     """
-    Test that get_greeting returns the exact expected string with default and custom message.
+    Test that get_greeting returns the exact expected string.
     """
     assert get_greeting() == "Hello World"
     assert get_greeting("Bye World") == "Bye World"
