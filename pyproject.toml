@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hello-jules"
+version = "0.1.0"
+dependencies = [
+    "pytest",
+    "flake8",
+]
+
+[project.scripts]
+hello-jules = "hello_jules.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["hello_jules"]
