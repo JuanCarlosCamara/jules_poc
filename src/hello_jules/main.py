@@ -1,7 +1,6 @@
 """
 Core Main Module for the Hello World application.
 """
-import argparse
 from typing import List, Optional
 
 
@@ -25,6 +24,19 @@ def main(args: Optional[List[str]] = None) -> None:
     Args:
         args (Optional[List[str]]): Command line arguments.
     """
+    if args is None:
+        import sys
+        args = sys.argv[1:]
+
+    # Fast-path for common invocations to avoid argparse import overhead
+    if len(args) == 0:
+        print(get_greeting())
+        return
+    elif len(args) == 1 and not args[0].startswith("-"):
+        print(get_greeting(args[0]))
+        return
+
+    import argparse
     parser = argparse.ArgumentParser(description="Prints a message.")
     parser.add_argument(
         "message",
