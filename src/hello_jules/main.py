@@ -1,7 +1,6 @@
 """
 Core Main Module for the Hello World application.
 """
-from typing import List, Optional
 
 
 def get_greeting(message: str = "Hello World") -> str:
@@ -17,7 +16,10 @@ def get_greeting(message: str = "Hello World") -> str:
     return message
 
 
-def main(args: Optional[List[str]] = None) -> None:
+# ⚡ Bolt Optimization: Use Python 3.10+ type hint syntax (list[str] | None)
+# instead of importing from `typing`. This avoids the startup overhead
+# associated with the typing module.
+def main(args: list[str] | None = None) -> None:
     """
     Calls get_greeting and prints the result to standard output.
 
