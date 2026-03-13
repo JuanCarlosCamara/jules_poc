@@ -1,7 +1,6 @@
 """
 Core Main Module for the Hello World application.
 """
-from typing import List, Optional
 
 
 def get_greeting(message: str = "Hello World") -> str:
@@ -17,12 +16,12 @@ def get_greeting(message: str = "Hello World") -> str:
     return message
 
 
-def main(args: Optional[List[str]] = None) -> None:
+def main(args: list[str] | None = None) -> None:
     """
     Calls get_greeting and prints the result to standard output.
 
     Args:
-        args (Optional[List[str]]): Command line arguments.
+        args (list[str] | None): Command line arguments.
     """
     if args is None:
         import sys
@@ -32,8 +31,9 @@ def main(args: Optional[List[str]] = None) -> None:
     if len(args) == 0:
         print(get_greeting())
         return
-    elif len(args) == 1 and not args[0].startswith("-"):
-        print(get_greeting(args[0]))
+    # Fast path: handle multi-word positional args without argparse import
+    elif not any(arg.startswith("-") for arg in args):
+        print(get_greeting(" ".join(args)))
         return
 
     import argparse
