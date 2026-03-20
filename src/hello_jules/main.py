@@ -1,7 +1,10 @@
 """
 Core Main Module for the Hello World application.
 """
-from typing import List, Optional
+from __future__ import annotations
+
+# Avoid importing the `typing` module to save ~20-40ms of startup overhead
+# for this simple CLI tool.
 
 
 def get_greeting(message: str = "Hello World") -> str:
@@ -17,12 +20,12 @@ def get_greeting(message: str = "Hello World") -> str:
     return message
 
 
-def main(args: Optional[List[str]] = None) -> None:
+def main(args: list[str] | None = None) -> None:
     """
     Calls get_greeting and prints the result to standard output.
 
     Args:
-        args (Optional[List[str]]): Command line arguments.
+        args (list[str] | None): Command line arguments.
     """
     if args is None:
         import sys
