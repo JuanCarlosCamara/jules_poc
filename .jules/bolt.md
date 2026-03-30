@@ -1,3 +1,7 @@
 ## 2024-05-24 - Python CLI Fast-Path Optimization
 **Learning:** For ultra-fast, simple Python CLIs, `import argparse` and `argparse.ArgumentParser` instantiation can contribute significantly (20-40ms) to startup overhead. When a CLI's core functionality is extremely straightforward (like printing a single string argument), the overhead of standard library imports like `argparse` can overshadow the execution time.
 **Action:** When optimizing basic Python CLI tools, consider implementing a "fast-path" that directly inspects `sys.argv` for the most common, simple use cases (e.g., zero or one positional argument). Fall back to lazy-loading `argparse` only when more complex flag parsing (like `-h` or `--help`) or multiple arguments are encountered.
+
+## 2024-05-25 - Removing Typing Module Overhead
+**Learning:** The `typing` module can add noticeable overhead (around ~16ms on my environment, up to 40-290ms depending on the environment) to the startup time of simple CLI applications. Since Python 3.10+, we can use the `|` operator for unions (like `list[str] | None`) and built-in types for type hinting.
+**Action:** When working on Python CLI applications that target Python 3.10+, avoid importing the `typing` module if possible. Instead, use `from __future__ import annotations` and the native Python 3.10+ type hinting syntax (`list[str] | None` instead of `Optional[List[str]]`) to improve startup performance.
