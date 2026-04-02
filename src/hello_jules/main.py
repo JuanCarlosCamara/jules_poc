@@ -1,7 +1,8 @@
 """
 Core Main Module for the Hello World application.
 """
-from typing import List, Optional
+from __future__ import annotations
+# Removed typing import to avoid startup overhead (approx. 40-290ms)
 
 
 def get_greeting(message: str = "Hello World") -> str:
@@ -17,7 +18,7 @@ def get_greeting(message: str = "Hello World") -> str:
     return message
 
 
-def main(args: Optional[List[str]] = None) -> None:
+def main(args: list[str] | None = None) -> None:
     """
     Calls get_greeting and prints the result to standard output.
 
