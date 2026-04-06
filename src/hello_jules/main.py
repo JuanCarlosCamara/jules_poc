@@ -24,16 +24,17 @@ def main(args: list[str] | None = None) -> None:
     Args:
         args (list[str] | None): Command line arguments.
     """
+    import sys  # Move import sys here to be used throughout the function
     if args is None:
-        import sys
         args = sys.argv[1:]
 
     # Fast-path for common invocations to avoid argparse import overhead
+    # Optimization: Use sys.stdout.write instead of print() for faster output
     if len(args) == 0:
-        print(get_greeting())
+        sys.stdout.write(get_greeting() + "\n")
         return
     elif len(args) == 1 and not args[0].startswith("-"):
-        print(get_greeting(args[0]))
+        sys.stdout.write(get_greeting(args[0]) + "\n")
         return
 
     import argparse
@@ -48,7 +49,8 @@ def main(args: list[str] | None = None) -> None:
     parsed_args = parser.parse_args(args)
 
     greeting = get_greeting(parsed_args.message)
-    print(greeting)
+    # Optimization: Use sys.stdout.write instead of print() for faster output
+    sys.stdout.write(greeting + "\n")
 
 
 if __name__ == "__main__":
