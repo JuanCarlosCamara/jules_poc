@@ -26,10 +26,14 @@ def main(args: list[str] | None = None) -> None:
     """
     if args is None:
         import sys
+        # Optimization: avoid sys.argv slicing overhead for default no-arg case
+        if len(sys.argv) == 1:
+            print(get_greeting())
+            return
         args = sys.argv[1:]
 
     # Fast-path for common invocations to avoid argparse import overhead
-    if len(args) == 0:
+    if not args:
         print(get_greeting())
         return
     elif len(args) == 1 and not args[0].startswith("-"):
