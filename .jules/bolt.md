@@ -5,3 +5,7 @@
 ## 2024-05-24 - Typing Module Import Overhead in CLIs
 **Learning:** The `typing` module can introduce a noticeable startup overhead (e.g. 40-290ms) which makes up a significant portion of execution time for extremely simple CLIs.
 **Action:** When working with Python 3.10+ syntax in contexts where startup speed is critical, replace `typing` imports (like `List`, `Optional`) with `from __future__ import annotations` and use native pipe/list syntax (`list[str] | None`) to avoid the module load time overhead.
+
+## 2024-05-24 - print() vs sys.stdout.write() optimization
+**Learning:** In Python CLI fast paths, replacing print() with sys.stdout.write() avoids formatting and flushing overhead and constitutes a valid micro-optimization.
+**Action:** Replace print() with sys.stdout.write(text + '\n') for performance parity, and ensure sys is imported at the module level rather than locally to prevent negating the performance gains via import overhead.
