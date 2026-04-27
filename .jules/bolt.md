@@ -5,3 +5,7 @@
 ## 2024-05-24 - Typing Module Import Overhead in CLIs
 **Learning:** The `typing` module can introduce a noticeable startup overhead (e.g. 40-290ms) which makes up a significant portion of execution time for extremely simple CLIs.
 **Action:** When working with Python 3.10+ syntax in contexts where startup speed is critical, replace `typing` imports (like `List`, `Optional`) with `from __future__ import annotations` and use native pipe/list syntax (`list[str] | None`) to avoid the module load time overhead.
+
+## 2024-05-24 - Module-Level Imports for Standard Library
+**Learning:** Moving standard library imports (like `sys`) from function scope to module scope avoids the repetitive overhead of `sys.modules` lookups and lock acquisition upon each function call.
+**Action:** Place lightweight standard library imports at the module level to provide measurable performance gains for frequently executed code paths like CLI fast-paths.
