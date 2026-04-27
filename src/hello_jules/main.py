@@ -2,6 +2,7 @@
 Core Main Module for the Hello World application.
 """
 from __future__ import annotations  # Optimization: avoid typing module overhead
+import sys
 
 
 def get_greeting(message: str = "Hello World") -> str:
@@ -25,7 +26,6 @@ def main(args: list[str] | None = None) -> None:
         args (list[str] | None): Command line arguments.
     """
     if args is None:
-        import sys
         args = sys.argv[1:]
 
     # Fast-path for common invocations to avoid argparse import overhead
